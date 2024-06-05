@@ -60,7 +60,7 @@ def play_round(player_1, player_2): #player 1 player 2 is names of players
         try:
             player_choice = int(input("Choose square: ")) #turn players choice into integer
         except ValueError:
-            input("Invalid input. Press any key to continue") #covers error for user not inputting a number
+            input("Invalid input. Press Enter to continue") #covers error for user not inputting a number
         else:            
             if player_choice in POS_OPTIONS and player_choice not in player_1_pos and player_choice not in player_2_pos: #must be a valid option, and not an option that has been previously chosen
                 if player_turn == player_1:
@@ -71,20 +71,20 @@ def play_round(player_1, player_2): #player 1 player 2 is names of players
                 print(update_grid(player_1_pos, player_2_pos)) #print updated grid
                 if check_win(player_1_pos):
                     playing = False
-                    return player_1
+                    return player_1 #return the name of the winner
                 elif check_win(player_2_pos):
                     playing = False
-                    return player_2
+                    return player_2 #return the name of the winner
                 elif check_draw(player_1_pos, player_2_pos): #check draw after check winner because this checks if game is over after there is no winner which means its a draw
                     playing = False
-                    return 'draw'
+                    return 'draw' 
                 else:
-                    if player_turn == player_1:
+                    if player_turn == player_1: #switch turns so next player is used in next loop
                         player_turn = player_2
                     else:
                         player_turn = player_1
             else:
-                input("Invalid input. Press any key to continue") #covers if user enters a number that is not a grid option or has already been used
+                input("Invalid input. Press Enter to continue") #covers if user enters a number that is not a grid option or has already been used
 
  
     
@@ -132,7 +132,7 @@ while program_running:
         if menu_option == 2:
             clear()
             print(RULES)
-            input("Press any key to return to the menu")           
+            input("Press Enter to return to the menu")           
         elif menu_option == 1:
             clear()
             game_ready = False
@@ -141,13 +141,13 @@ while program_running:
                 player_1 = input("What is the name of player 1? ")
                 player_2 = input("What is the name of player 2? ")
                 if player_1 == player_2:
-                    continue
-                elif player_1.isspace() or player_2.isspace():
+                    continue #loop again in the while loop and ask for names again due to duplicates
+                elif player_1.isspace() or player_2.isspace(): 
                         print("Name must contain at least one character")
-                        continue
+                        continue #does not allow the players to have only blank space in their names so loop again
                 else:
                     game_ready = True
-                    break
+                    break #break loop if names are unique and have at least 1 character
             clear()
             print(f"{player_1} is x, and {player_2} is o.")
             print(STARTING_INSTRUCTIONS)
@@ -155,11 +155,11 @@ while program_running:
             winner = play_round(player_1, player_2)
             if winner == 'draw':
                 print("It's a draw!")
-                input("Press any button to return to menu")
+                input("Press Enter to return to menu")
                 clear()
             else:
                 print(f"{winner} won the round!")
-                input("Press any button to return to menu")
+                input("Press Enter to return to menu")
                 clear()
         elif menu_option == 3:
             clear()
